@@ -8,7 +8,7 @@
         /* Фон и стиль страницы */
         body {
             display: flex;
-            flex-direction: column; /* Позволяет размещать элементы вертикально */
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -32,8 +32,8 @@
 
         /* Логотип */
         .logo {
-            width: 100px; /* Задайте ширину логотипа */
-            margin-bottom: 20px; /* Отступ снизу */
+            width: 100px;
+            margin-bottom: 20px;
         }
 
         /* Стили текста */
@@ -57,7 +57,7 @@
         }
 
         .button:hover {
-            background-color: #7b0ddb; /* Тёмно-фиолетовый при наведении */
+            background-color: #7b0ddb;
         }
 
         /* Стиль для сообщения об ошибке */
@@ -71,24 +71,43 @@
             display: none;
         }
 
-        /* Стили для индикатора загрузки */
-        .loading {
-            font-size: 1.5em;
-            color: #00d4ff;
-            opacity: 0;
-            transition: opacity 0.5s ease;
+        /* Контейнер для множителя и его анимации */
+        .multiplier-container {
+            position: relative;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+            width: 150px;
+            height: 150px;
         }
 
-        .loading.show {
-            opacity: 1;
+        /* Светящийся круг */
+        .multiplier-circle {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 4px solid rgba(0, 212, 255, 0.8);
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.8), 0 0 20px rgba(0, 212, 255, 0.5);
+            animation: spin 2s linear infinite;
+        }
+
+        /* Анимация вращения */
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         /* Стили для множителя */
         .multiplier {
-            font-size: 4em;
-            margin: 20px 0;
+            font-size: 3.5em;
             color: #00d4ff;
-            opacity: 0; /* Скрыто изначально */
+            opacity: 0;
             transform: scale(0.5);
             transition: opacity 1s ease, transform 1s ease;
         }
@@ -116,7 +135,7 @@
 </head>
 <body>
     <div class="game-container" id="mainContainer">
-        <a href="https://your-link-here.com" target="_blank"> <!-- Замените на нужный URL -->
+        <a href="https://your-link-here.com" target="_blank">
             <img src="https://1winbd.com/wp-content/uploads/2022/10/lucky-jet-header.webp" alt="Логотип" class="logo" />
         </a>
         <h1>Введите ID вашего аккаунта 1Win</h1>
@@ -131,21 +150,8 @@
     </div>
 
     <script>
-        // Массив разрешенных ID
-        const allowedIds = [
-            '12345', // Замените на ваши реальные ID
-            '67890',
-            'abcde'
-        ];
-
-        // Массив предопределенных множителей
-        const predefinedMultipliers = [
-            'x1.20',
-            'x1.50',
-            'x4.50'
-        ];
-
-        // Индекс текущего множителя
+        const allowedIds = ['12345', '67890', 'abcde'];
+        const predefinedMultipliers = ['x1.20', 'x1.50', 'x4.50'];
         let currentMultiplierIndex = 0;
 
         function checkAccess() {
@@ -154,47 +160,44 @@
             const loadingElement = document.getElementById("loading");
             const mainContainer = document.getElementById("mainContainer");
 
-            // Скрываем ошибку и показываем индикатор загрузки
             errorMsg.classList.add("hidden");
             loadingElement.classList.remove("hidden");
             loadingElement.classList.add("show");
 
-            // Проверка ID с задержкой
             setTimeout(() => {
                 loadingElement.classList.remove("show");
                 loadingElement.classList.add("hidden");
 
                 if (allowedIds.includes(accountId)) {
-                    // Если ID допустимый, меняем содержимое страницы
                     mainContainer.innerHTML = `
                         <a href="https://your-link-here.com" target="_blank">
                             <img src="https://1winbd.com/wp-content/uploads/2022/10/lucky-jet-header.webp" alt="Логотип" class="logo" />
                         </a>
                         <h1>Lucky Jet Predictor</h1>
                         <div class="loading hidden" id="loadingMultiplier">Подключение к игре...</div>
-                        <div class="multiplier hidden" id="multiplier"></div>
+                        <div class="multiplier-container">
+                            <div class="multiplier-circle"></div>
+                            <div class="multiplier hidden" id="multiplier"></div>
+                        </div>
                         <button class="button" onclick="generatePredefinedMultiplier()">Получить сигнал</button>
                         <div class="error hidden" id="multiplierError"></div>
                     `;
                 } else {
-                    // Показываем ошибку при недопустимом ID
                     errorMsg.textContent = "Доступ запрещён. ";
                     errorMsg.innerHTML += '<a href="https://t.me/ваш_телеграм" style="color: #9d0fff;">Получить доступ</a>';
                     errorMsg.classList.remove("hidden");
                 }
-            }, 2000); // 2 секунды
+            }, 2000);
         }
 
         function generatePredefinedMultiplier() {
             const multiplierElement = document.getElementById("multiplier");
             const loadingElement = document.getElementById("loadingMultiplier");
 
-            // Скрываем множитель и показываем индикатор загрузки
             multiplierElement.classList.remove("show");
             loadingElement.classList.remove("hidden");
             loadingElement.classList.add("show");
 
-            // Эмуляция загрузки и отображение множителя
             setTimeout(() => {
                 const selectedMultiplier = predefinedMultipliers[currentMultiplierIndex];
                 multiplierElement.textContent = selectedMultiplier;
@@ -204,9 +207,8 @@
                 multiplierElement.classList.add("show");
                 multiplierElement.classList.remove("hidden");
 
-                // Обновляем индекс для следующего множителя
                 currentMultiplierIndex = (currentMultiplierIndex + 1) % predefinedMultipliers.length;
-            }, 2000); // 2 секунды
+            }, 2000);
         }
     </script>
 </body>
