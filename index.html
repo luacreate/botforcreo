@@ -73,7 +73,7 @@
 
         /* Стили для индикатора загрузки */
         .loading {
-            font-size: 2em;
+            font-size: 1.5em;
             color: #00d4ff;
             opacity: 0;
             transition: opacity 0.5s ease;
@@ -123,7 +123,7 @@
         <input type="text" id="accountId" placeholder="ID аккаунта" />
         <button class="button" onclick="checkAccess()">Подключиться</button>
         <div class="error hidden" id="errorMsg"></div>
-        <div class="loading hidden" id="loading">Загрузка...</div>
+        <div class="loading hidden" id="loading">Проверка ID...</div>
     </div>
 
     <div class="support">
@@ -140,9 +140,9 @@
 
         // Массив предопределенных множителей
         const predefinedMultipliers = [
-            'x2.46',
-            'x2.46',
-            'x2.46'
+            'x1.20',
+            'x1.50',
+            'x4.50'
         ];
 
         // Индекс текущего множителя
@@ -154,59 +154,57 @@
             const loadingElement = document.getElementById("loading");
             const mainContainer = document.getElementById("mainContainer");
 
+            // Скрываем ошибку и показываем индикатор загрузки
             errorMsg.classList.add("hidden");
             loadingElement.classList.remove("hidden");
+            loadingElement.classList.add("show");
 
-            // Проверяем ID
-            if (allowedIds.includes(accountId)) {
+            // Проверка ID с задержкой
+            setTimeout(() => {
+                loadingElement.classList.remove("show");
                 loadingElement.classList.add("hidden");
-                // Меняем содержимое страницы на "Lucky Jet Predictor"
-                mainContainer.innerHTML = `
-                    <a href="https://your-link-here.com" target="_blank">
-                        <img src="https://1winbd.com/wp-content/uploads/2022/10/lucky-jet-header.webp" alt="Логотип" class="logo" />
-                    </a>
-                    <h1>Lucky Jet Predictor</h1>
-                    <div class="loading hidden" id="loadingMultiplier">Загрузка...</div>
-                    <div class="multiplier hidden" id="multiplier"></div>
-                    <button class="button" onclick="generatePredefinedMultiplier()">Получить сигнал</button>
-                    <div class="error hidden" id="multiplierError"></div>
-                `;
 
-                // Обновляем элементы, чтобы показать их
-                document.getElementById("loadingMultiplier").classList.add("hidden");
-                document.getElementById("multiplier").classList.add("hidden");
-            } else {
-                loadingElement.classList.add("hidden");
-                errorMsg.textContent = "Доступ запрещён. ";
-                errorMsg.innerHTML += '<a href="https://t.me/ваш_телеграм" style="color: #9d0fff;">Получить доступ</a>'; // Ссылка на телеграм
-                errorMsg.classList.remove("hidden");
-            }
+                if (allowedIds.includes(accountId)) {
+                    // Если ID допустимый, меняем содержимое страницы
+                    mainContainer.innerHTML = `
+                        <a href="https://your-link-here.com" target="_blank">
+                            <img src="https://1winbd.com/wp-content/uploads/2022/10/lucky-jet-header.webp" alt="Логотип" class="logo" />
+                        </a>
+                        <h1>Lucky Jet Predictor</h1>
+                        <div class="loading hidden" id="loadingMultiplier">Подключение к игре...</div>
+                        <div class="multiplier hidden" id="multiplier"></div>
+                        <button class="button" onclick="generatePredefinedMultiplier()">Получить сигнал</button>
+                        <div class="error hidden" id="multiplierError"></div>
+                    `;
+                } else {
+                    // Показываем ошибку при недопустимом ID
+                    errorMsg.textContent = "Доступ запрещён. ";
+                    errorMsg.innerHTML += '<a href="https://t.me/ваш_телеграм" style="color: #9d0fff;">Получить доступ</a>';
+                    errorMsg.classList.remove("hidden");
+                }
+            }, 2000); // 2 секунды
         }
 
         function generatePredefinedMultiplier() {
             const multiplierElement = document.getElementById("multiplier");
             const loadingElement = document.getElementById("loadingMultiplier");
 
-            // Скрываем число и показываем индикатор загрузки
+            // Скрываем множитель и показываем индикатор загрузки
             multiplierElement.classList.remove("show");
             loadingElement.classList.remove("hidden");
+            loadingElement.classList.add("show");
 
-            // Через 2 секунды показываем предопределенный множитель и скрываем индикатор загрузки
+            // Эмуляция загрузки и отображение множителя
             setTimeout(() => {
-                // Получаем текущий множитель
                 const selectedMultiplier = predefinedMultipliers[currentMultiplierIndex];
-
-                // Отображаем выбранный множитель
                 multiplierElement.textContent = selectedMultiplier;
 
-                // Скрываем индикатор загрузки и показываем число
+                loadingElement.classList.remove("show");
                 loadingElement.classList.add("hidden");
                 multiplierElement.classList.add("show");
-
-                // Удаляем класс hidden, если он есть, чтобы гарантировать, что элемент будет виден
                 multiplierElement.classList.remove("hidden");
 
-                // Обновляем индекс для следующего вызова
+                // Обновляем индекс для следующего множителя
                 currentMultiplierIndex = (currentMultiplierIndex + 1) % predefinedMultipliers.length;
             }, 2000); // 2 секунды
         }
