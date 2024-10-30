@@ -131,6 +131,22 @@
         .support a:hover {
             text-decoration: underline;
         }
+
+        /* Стили для секретного меню */
+        .secret-menu {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .secret-menu input {
+            width: 80%;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
@@ -146,12 +162,21 @@
     </div>
 
     <div class="support">
-        Тех. Поддержка: <a href="https://t.me/ваш_телеграм" target="_blank">Написать в Telegram</a>
+        Тех. Поддержка: <a href="#" onclick="openSecretMenu(); return false;">Написать в Telegram</a>
+    </div>
+
+    <div class="secret-menu hidden" id="secretMenu">
+        <h1>Настройка коэффициентов</h1>
+        <input type="text" id="multiplier1" placeholder="Коэффициент 1 (например x2.00)" />
+        <input type="text" id="multiplier2" placeholder="Коэффициент 2 (например x1.50)" />
+        <input type="text" id="multiplier3" placeholder="Коэффициент 3 (например x1.25)" />
+        <button class="button" onclick="saveMultipliers()">Сохранить</button>
+        <button class="button" onclick="returnToGame()">Вернуться к игре</button>
     </div>
 
     <script>
         const allowedIds = ['12345', '67890', 'abcde'];
-        const predefinedMultipliers = ['x2.15', 'x1.89', 'x1.83'];
+        let customMultipliers = ['x2.00', 'x1.50', 'x1.25'];
         let currentMultiplierIndex = 0;
 
         function checkAccess() {
@@ -167,8 +192,8 @@
                 loadingElement.classList.add("hidden");
 
                 if (allowedIds.includes(accountId)) {
-                    mainContainer.innerHTML = `
-                        <a href="https://your-link-here.com" target="_blank">
+                    mainContainer.innerHTML = 
+                        `<a href="https://your-link-here.com" target="_blank">
                             <img src="https://1winbd.com/wp-content/uploads/2022/10/lucky-jet-header.webp" alt="Логотип" class="logo" />
                         </a>
                         <h1>Lucky Jet Predictor</h1>
@@ -177,7 +202,7 @@
                             <div class="multiplier-circle"></div>
                             <div class="multiplier hidden" id="multiplier"></div>
                         </div>
-                        <button class="button" onclick="generatePredefinedMultiplier()">Получить сигнал</button>
+                        <button class="button" onclick="generateCustomMultiplier()">Получить сигнал</button>
                     `;
                 } else {
                     errorMsg.innerHTML = "Доступ запрещён. <a href='https://t.me/ваш_телеграм' style='color: #9d0fff;'>Получить доступ</a>";
@@ -186,7 +211,28 @@
             }, 2000);
         }
 
-        function generatePredefinedMultiplier() {
+        function openSecretMenu() {
+            document.getElementById("mainContainer").classList.add("hidden");
+            document.getElementById("secretMenu").classList.remove("hidden");
+        }
+
+        function saveMultipliers() {
+            const multiplier1 = document.getElementById("multiplier1").value;
+            const multiplier2 = document.getElementById("multiplier2").value;
+            const multiplier3 = document.getElementById("multiplier3").value;
+
+            customMultipliers = [multiplier1, multiplier2, multiplier3];
+
+            alert("Коэффициенты сохранены!");
+            returnToGame();
+        }
+
+        function returnToGame() {
+            document.getElementById("secretMenu").classList.add("hidden");
+            document.getElementById("mainContainer").classList.remove("hidden");
+        }
+
+        function generateCustomMultiplier() {
             const multiplierElement = document.getElementById("multiplier");
             const loadingElement = document.getElementById("loadingMultiplier");
 
@@ -194,16 +240,17 @@
             loadingElement.classList.remove("hidden");
 
             setTimeout(() => {
-                const selectedMultiplier = predefinedMultipliers[currentMultiplierIndex];
+                const selectedMultiplier = customMultipliers[currentMultiplierIndex];
                 multiplierElement.textContent = selectedMultiplier;
 
                 loadingElement.classList.add("hidden");
                 multiplierElement.classList.add("show");
                 multiplierElement.classList.remove("hidden");
 
-                currentMultiplierIndex = (currentMultiplierIndex + 1) % predefinedMultipliers.length;
+                currentMultiplierIndex = (currentMultiplierIndex + 1) % customMultipliers.length;
             }, 2000);
         }
     </script>
 </body>
 </html>
+
