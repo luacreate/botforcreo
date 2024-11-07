@@ -254,13 +254,16 @@
             document.getElementById("mainContainer").style.pointerEvents = "auto";
         }
 
-        function generateRandomMultiplier() {
+        function generateCustomMultiplier() {
             const multiplierElement = document.getElementById("multiplier");
-
             multiplierElement.classList.remove("show");
             setTimeout(() => {
-                const randomMultiplier = (Math.random() * 9 + 1).toFixed(2);
-                multiplierElement.textContent = `x${randomMultiplier}`;
+                const selectedMultiplier = customMultipliers[currentMultiplierIndex];
+                multiplierElement.textContent = selectedMultiplier;
+                multiplierElement.classList.add("show");
+                currentMultiplierIndex = (currentMultiplierIndex + 1) % customMultipliers.length;
+            }, 2000);
+        }`;
                 multiplierElement.classList.add("show");
             }, 2000);
         }
