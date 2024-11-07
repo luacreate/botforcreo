@@ -7,17 +7,18 @@
     <style>
         /* Фон и стиль страницы */
         body {
+            margin: 0;
+            height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: Arial, sans-serif;
+            justify-content: center;
             background: url('redsoftlogo.png') no-repeat center center;
             background-size: cover;
-            color: white;
+            font-family: Arial, sans-serif;
             overflow: hidden;
+            color: white;
+            transform: scale(1.05);
         }
 
         .overlay {
@@ -31,16 +32,18 @@
         }
 
         /* Стиль контейнера */
-        .game-container {
+        .container {
             position: relative;
             z-index: 1;
-            text-align: center;
-            background-color: rgba(50, 50, 50, 0.9);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             padding: 25px;
             border-radius: 20px;
-            max-width: 300px;
-            width: 90%;
+            background: rgba(50, 50, 50, 0.9);
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            max-width: 90%;
+            text-align: center;
         }
 
         /* Логотип */
@@ -51,39 +54,29 @@
 
         /* Стили текста */
         h1 {
-            font-size: 1.8em;
+            font-size: 36px;
+            margin: 0;
             margin-bottom: 15px;
-            color: #ffffff;
         }
 
         /* Стили кнопки */
         .button {
-            background-color: #1976D2;
-            color: white;
             padding: 15px 40px;
-            font-size: 1.1em;
+            font-size: 20px;
+            cursor: pointer;
+            background: #1976D2;
             border: none;
             border-radius: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
+            color: #FFFFFF;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.3s;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
             margin-top: 10px;
         }
 
         .button:hover {
-            background-color: #343a40;
+            background: #343a40;
             transform: scale(1.05);
-        }
-
-        /* Стиль для сообщения об ошибке */
-        .error {
-            color: red;
-            margin-top: 10px;
-        }
-
-        /* Скрыть элементы по умолчанию */
-        .hidden {
-            display: none;
         }
 
         /* Контейнер для множителя и его анимации */
@@ -134,8 +127,10 @@
 
         /* Стили для тех. поддержки */
         .support {
-            margin-top: 20px;
+            position: fixed;
+            bottom: 20px;
             color: white;
+            z-index: 1;
             background: rgba(50, 50, 50, 0.8);
             padding: 10px;
             border-radius: 10px;
@@ -171,19 +166,20 @@
 <body>
     <div class="overlay"></div>
 
-    <div class="game-container" id="mainContainer">
+    <div class="container" id="mainContainer">
         <a href="https://your-link-here.com" target="_blank">
             <img src="https://1winbd.com/wp-content/uploads/2022/10/lucky-jet-header.webp" alt="Логотип" class="logo" />
         </a>
-        <h1>Введите ID вашего аккаунта 1Win</h1>
-        <input type="text" id="accountId" placeholder="ID аккаунта" />
-        <button class="button" onclick="checkAccess()">Подключиться</button>
-        <div class="error hidden" id="errorMsg"></div>
-        <div class="loading hidden" id="loading">Проверка ID...</div>
-    </div>
+        <h1 id="heading">Red Soft Signals </h1>
+        
+        <div class="multiplier-container">
+            <div class="multiplier-circle"></div>
+            <div class="multiplier" id="multiplier">x0.00</div>
+        </div>
+        <button class="button" onclick="generateRandomMultiplier()">Получить сигнал</button>
+        <button class="button" style="background: #808080;" onclick="window.location.href='menu.html'">Вернуться в меню</button>
 
-    <div class="support">
-        Тех. Поддержка: <a href="#" onclick="openSecretMenu(); return false;">Написать в Telegram</a>
+        <span id="supportText">Тех. Поддержка:</span> <a href="https://t.me/adm_1w" target="_blank" id="supportLink">Написать в Telegram</a>
     </div>
 
     <div class="secret-menu hidden" id="secretMenu">
@@ -253,22 +249,14 @@
             document.getElementById("mainContainer").classList.remove("hidden");
         }
 
-        function generateCustomMultiplier() {
+        function generateRandomMultiplier() {
             const multiplierElement = document.getElementById("multiplier");
-            const loadingElement = document.getElementById("loadingMultiplier");
 
             multiplierElement.classList.remove("show");
-            loadingElement.classList.remove("hidden");
-
             setTimeout(() => {
-                const selectedMultiplier = customMultipliers[currentMultiplierIndex];
-                multiplierElement.textContent = selectedMultiplier;
-
-                loadingElement.classList.add("hidden");
+                const randomMultiplier = (Math.random() * 9 + 1).toFixed(2);
+                multiplierElement.textContent = `x${randomMultiplier}`;
                 multiplierElement.classList.add("show");
-                multiplierElement.classList.remove("hidden");
-
-                currentMultiplierIndex = (currentMultiplierIndex + 1) % customMultipliers.length;
             }, 2000);
         }
     </script>
