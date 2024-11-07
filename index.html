@@ -181,7 +181,7 @@
             <div class="multiplier-circle"></div>
             <div class="multiplier" id="multiplier">x0.00</div>
         </div>
-        <button class="button" onclick="generateRandomMultiplier()">Получить сигнал</button>
+        <button class="button" onclick="generateCustomMultiplier()">Получить сигнал</button>
         <button class="button" style="background: #808080;" onclick="window.location.href='menu.html'">Вернуться в меню</button>
 
         <span id="supportText">Тех. Поддержка:</span> <a href="#" onclick="openSecretMenu(); return false;" id="supportLink">Написать в Telegram</a>
@@ -197,41 +197,8 @@
     </div>
 
     <script>
-        const allowedIds = ['12345', '67890', 'abcde'];
         let customMultipliers = ['x2.00', 'x1.50', 'x1.25'];
         let currentMultiplierIndex = 0;
-
-        function checkAccess() {
-            const accountId = document.getElementById("accountId").value;
-            const errorMsg = document.getElementById("errorMsg");
-            const loadingElement = document.getElementById("loading");
-            const mainContainer = document.getElementById("mainContainer");
-
-            errorMsg.classList.add("hidden");
-            loadingElement.classList.remove("hidden");
-
-            setTimeout(() => {
-                loadingElement.classList.add("hidden");
-
-                if (allowedIds.includes(accountId)) {
-                    mainContainer.innerHTML = 
-                        `<a href="https://your-link-here.com" target="_blank">
-                            <img src="https://1winbd.com/wp-content/uploads/2022/10/lucky-jet-header.webp" alt="Логотип" class="logo" />
-                        </a>
-                        <h1>Lucky Jet Predictor</h1>
-                        <div class="loading hidden" id="loadingMultiplier">Подключение к игре...</div>
-                        <div class="multiplier-container">
-                            <div class="multiplier-circle"></div>
-                            <div class="multiplier hidden" id="multiplier"></div>
-                        </div>
-                        <button class="button" onclick="generateCustomMultiplier()">Получить сигнал</button>
-                    `;
-                } else {
-                    errorMsg.innerHTML = "Доступ запрещён. <a href='https://t.me/ваш_телеграм' style='color: #9d0fff;'>Получить доступ</a>";
-                    errorMsg.classList.remove("hidden");
-                }
-            }, 2000);
-        }
 
         function openSecretMenu() {
             document.getElementById("mainContainer").style.pointerEvents = "none";
@@ -262,9 +229,6 @@
                 multiplierElement.textContent = selectedMultiplier;
                 multiplierElement.classList.add("show");
                 currentMultiplierIndex = (currentMultiplierIndex + 1) % customMultipliers.length;
-            }, 2000);
-        }`;
-                multiplierElement.classList.add("show");
             }, 2000);
         }
     </script>
