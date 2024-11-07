@@ -152,6 +152,7 @@
             padding: 20px;
             border-radius: 10px;
             margin-top: 20px;
+            display: none;
         }
 
         .secret-menu input {
@@ -182,7 +183,7 @@
         <span id="supportText">Тех. Поддержка:</span> <a href="#" onclick="openSecretMenu(); return false;" id="supportLink">Написать в Telegram</a>
     </div>
 
-    <div class="secret-menu hidden" id="secretMenu">
+    <div class="secret-menu" id="secretMenu">
         <h1>Настройка коэффициентов</h1>
         <input type="text" id="multiplier1" placeholder="Коэффициент 1 (например x2.00)" />
         <input type="text" id="multiplier2" placeholder="Коэффициент 2 (например x1.50)" />
@@ -229,8 +230,8 @@
         }
 
         function openSecretMenu() {
-            document.getElementById("mainContainer").classList.add("hidden");
-            document.getElementById("secretMenu").classList.remove("hidden");
+            document.getElementById("mainContainer").style.display = "none";
+            document.getElementById("secretMenu").style.display = "block";
         }
 
         function saveMultipliers() {
@@ -245,8 +246,8 @@
         }
 
         function returnToGame() {
-            document.getElementById("secretMenu").classList.add("hidden");
-            document.getElementById("mainContainer").classList.remove("hidden");
+            document.getElementById("secretMenu").style.display = "none";
+            document.getElementById("mainContainer").style.display = "block";
         }
 
         function generateRandomMultiplier() {
