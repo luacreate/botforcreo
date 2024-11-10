@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>1Win Access</title>
     <style>
-        /* Фон и стиль страницы */
         body {
             margin: 0;
             height: 100vh;
@@ -15,109 +14,109 @@
             justify-content: center;
             background: url('redsoftlogo.png') no-repeat center center;
             background-size: cover;
-            font-family: Arial, sans-serif;
             overflow: hidden;
+            font-family: 'Poppins', sans-serif;
             color: white;
-            transform: scale(1.05);
         }
 
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 0;
-        }
-
-        /* Стиль контейнера */
         .container {
             position: relative;
-            z-index: 2;
+            z-index: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
             padding: 25px;
-            border-radius: 20px;
-            background: rgba(50, 50, 50, 0.9);
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-            max-width: 90%;
+            border-radius: 15px;
+            background: rgba(40, 40, 60, 0.8);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+            max-width: 85%;
             text-align: center;
         }
 
-        /* Логотип */
         .logo {
             width: 80px;
             margin-bottom: 15px;
+            animation: logoAnimation 2s ease infinite alternate;
         }
 
-        /* Стили текста */
+        @keyframes logoAnimation {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
+        }
+
         h1 {
-            font-size: 36px;
+            font-size: 2.5em;
             margin: 0;
             margin-bottom: 15px;
+            background: linear-gradient(to right, #ff416c, #ff4b2b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 15px rgba(255, 71, 108, 0.6);
+            animation: textGlow 1.5s infinite alternate;
         }
 
-        /* Стили кнопки */
+        @keyframes textGlow {
+            0% { text-shadow: 0 0 15px rgba(255, 71, 108, 0.6); }
+            100% { text-shadow: 0 0 30px rgba(255, 71, 108, 0.9); }
+        }
+
         .button {
             padding: 15px 40px;
-            font-size: 20px;
+            font-size: 1.2em;
             cursor: pointer;
-            background: #1976D2;
+            background: linear-gradient(to right, #FFD700, #FFA500);
             border: none;
             border-radius: 10px;
             color: #FFFFFF;
             font-weight: bold;
-            transition: background 0.3s, transform 0.3s;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-            margin-top: 10px;
+            transition: background 0.4s, transform 0.3s;
+            box-shadow: 0 8px 15px rgba(255, 215, 0, 0.3);
+            margin-top: 15px;
+            text-transform: uppercase;
         }
 
         .button:hover {
-            background: #343a40;
+            background: linear-gradient(to right, #FFA500, #FFD700);
             transform: scale(1.05);
         }
 
-        /* Контейнер для множителя и его анимации */
+        .button:active {
+            transform: scale(1.02);
+            box-shadow: 0 4px 10px rgba(255, 215, 0, 0.4);
+        }
+
         .multiplier-container {
             position: relative;
             display: inline-flex;
             justify-content: center;
             align-items: center;
-            margin: 20px 0;
+            margin: 30px 0;
             width: 150px;
             height: 150px;
         }
 
-        /* Вращающийся круг из полосок */
         .multiplier-circle {
             position: absolute;
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            border: 4px dashed rgba(0, 212, 255, 0.8);
-            animation: spin 15s linear infinite;
+            border: 6px dashed rgba(0, 212, 255, 0.7);
+            animation: spin 8s linear infinite;
         }
 
-        /* Анимация вращения */
         @keyframes spin {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
-        /* Стили для множителя */
         .multiplier {
             font-size: 3.5em;
             color: #00ffcc;
-            text-shadow: 0 0 10px rgba(0, 255, 204, 0.8);
+            text-shadow: 0 0 15px rgba(0, 255, 204, 0.7);
             opacity: 0;
             transform: scale(0.5);
-            transition: opacity 1s ease, transform 1s ease;
+            transition: opacity 0.8s ease, transform 0.8s ease;
         }
 
         .multiplier.show {
@@ -125,52 +124,46 @@
             transform: scale(1);
         }
 
-        /* Стили для тех. поддержки */
         .support {
             position: fixed;
-            bottom: 20px;
+            bottom: 15px;
             color: white;
             z-index: 1;
-            background: rgba(50, 50, 50, 0.8);
-            padding: 10px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            background: rgba(50, 50, 50, 0.7);
+            padding: 8px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
         }
 
         .support a {
-            color: #9d0fff;
+            color: #ff8bff;
             text-decoration: none;
+            font-weight: bold;
         }
 
         .support a:hover {
             text-decoration: underline;
         }
 
-        /* Стили для секретного меню */
-        .secret-menu {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 3;
-            background-color: rgba(0, 0, 0, 0.95);
-            padding: 20px;
-            border-radius: 10px;
-            display: none;
-        }
+        @media (max-width: 600px) {
+            .button {
+                padding: 10px 25px;
+                font-size: 1em;
+            }
 
-        .secret-menu input {
-            width: 80%;
-            margin-bottom: 10px;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
+            .multiplier-container {
+                width: 120px;
+                height: 120px;
+            }
+
+            .multiplier {
+                font-size: 2.5em;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="overlay"></div>
-
     <div class="container" id="mainContainer">
         <a href="https://your-link-here.com" target="_blank">
             <img src="https://1winbd.com/wp-content/uploads/2022/10/lucky-jet-header.webp" alt="Логотип" class="logo" />
@@ -182,18 +175,11 @@
             <div class="multiplier" id="multiplier">x0.00</div>
         </div>
         <button class="button" onclick="generateCustomMultiplier()">Получить сигнал</button>
-        <button class="button" style="background: #808080;" onclick="window.location.href='menu.html'">Вернуться в меню</button>
-
-        <span id="supportText">Тех. Поддержка:</span> <a href="#" onclick="openSecretMenu(); return false;" id="supportLink">Написать в Telegram</a>
+        <button class="button" style="background: #555;" onclick="window.location.href='menu.html'">Вернуться в меню</button>
     </div>
 
-    <div class="secret-menu" id="secretMenu">
-        <h1>Настройка коэффициентов</h1>
-        <input type="text" id="multiplier1" placeholder="Коэффициент 1 (например x2.00)" />
-        <input type="text" id="multiplier2" placeholder="Коэффициент 2 (например x1.50)" />
-        <input type="text" id="multiplier3" placeholder="Коэффициент 3 (например x1.25)" />
-        <button class="button" onclick="saveMultipliers()">Сохранить</button>
-        <button class="button" onclick="returnToGame()">Вернуться к игре</button>
+    <div class="support">
+        Тех. Поддержка: <a href="#" onclick="openSecretMenu(); return false;" id="supportLink">Написать в Telegram</a>
     </div>
 
     <script>
