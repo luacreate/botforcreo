@@ -25,18 +25,18 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 30px;
+            padding: 40px;
             border-radius: 20px;
             background: rgba(40, 40, 60, 0.8);
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(10px);
-            max-width: 95%;
+            max-width: 90%;
             text-align: center;
         }
 
         .logo {
-            width: 80px;
-            margin-bottom: 15px;
+            width: 100px;
+            margin-bottom: 20px;
             animation: logoAnimation 2s ease infinite alternate;
         }
 
@@ -46,33 +46,33 @@
         }
 
         h1 {
-            font-size: 2.5em;
+            font-size: 2.8em;
             margin: 0;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             background: linear-gradient(to right, #ff416c, #ff4b2b);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 15px rgba(255, 71, 108, 0.6);
+            text-shadow: 0 0 20px rgba(255, 71, 108, 0.6);
             animation: textGlow 1.5s infinite alternate;
         }
 
         @keyframes textGlow {
-            0% { text-shadow: 0 0 15px rgba(255, 71, 108, 0.6); }
-            100% { text-shadow: 0 0 30px rgba(255, 71, 108, 0.9); }
+            0% { text-shadow: 0 0 20px rgba(255, 71, 108, 0.6); }
+            100% { text-shadow: 0 0 40px rgba(255, 71, 108, 0.9); }
         }
 
         .button {
-            padding: 15px 35px;
-            font-size: 1.2em;
+            padding: 18px 40px;
+            font-size: 1.4em;
             cursor: pointer;
             background: linear-gradient(to right, #FFD700, #FFA500);
             border: none;
-            border-radius: 12px;
+            border-radius: 15px;
             color: #FFFFFF;
             font-weight: bold;
             transition: background 0.4s, transform 0.3s;
-            box-shadow: 0 8px 15px rgba(255, 215, 0, 0.3);
-            margin-top: 15px;
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.3);
+            margin-top: 20px;
             text-transform: uppercase;
         }
 
@@ -83,7 +83,7 @@
 
         .button:active {
             transform: scale(1.02);
-            box-shadow: 0 6px 12px rgba(255, 215, 0, 0.4);
+            box-shadow: 0 6px 15px rgba(255, 215, 0, 0.4);
         }
 
         .multiplier-container {
@@ -91,9 +91,9 @@
             display: inline-flex;
             justify-content: center;
             align-items: center;
-            margin: 30px 0;
-            width: 150px;
-            height: 150px;
+            margin: 35px 0;
+            width: 170px;
+            height: 170px;
         }
 
         .multiplier-circle {
@@ -111,9 +111,9 @@
         }
 
         .multiplier {
-            font-size: 3em;
+            font-size: 3.2em;
             color: #00ffcc;
-            text-shadow: 0 0 15px rgba(0, 255, 204, 0.7);
+            text-shadow: 0 0 20px rgba(0, 255, 204, 0.7);
             opacity: 0;
             transform: scale(0.5);
             transition: opacity 0.8s ease, transform 0.8s ease;
@@ -126,14 +126,14 @@
 
         .support {
             position: fixed;
-            bottom: 15px;
+            bottom: 20px;
             color: white;
             z-index: 1;
             background: rgba(50, 50, 50, 0.7);
-            padding: 8px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+            padding: 10px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
         }
 
         .support a {
@@ -146,39 +146,62 @@
             text-decoration: underline;
         }
 
+        .secret-menu {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 3;
+            background-color: rgba(0, 0, 0, 0.95);
+            padding: 20px;
+            border-radius: 15px;
+            display: none;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .secret-menu input {
+            width: calc(100% - 20px);
+            margin-bottom: 10px;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+        }
+
         @media (max-width: 600px) {
             .container {
-                padding: 20px;
+                padding: 25px;
                 max-width: 95%;
             }
 
             .logo {
-                width: 60px;
-                margin-bottom: 10px;
+                width: 80px;
+                margin-bottom: 15px;
             }
 
             h1 {
-                font-size: 2.2em;
-                margin-bottom: 12px;
+                font-size: 2.5em;
+                margin-bottom: 15px;
             }
 
             .button {
-                padding: 12px 30px;
-                font-size: 1.1em;
+                padding: 15px 35px;
+                font-size: 1.2em;
             }
 
             .multiplier-container {
-                width: 130px;
-                height: 130px;
+                width: 150px;
+                height: 150px;
             }
 
             .multiplier {
-                font-size: 2.5em;
+                font-size: 3em;
             }
 
             .support {
-                bottom: 10px;
-                padding: 6px;
+                bottom: 15px;
+                padding: 8px;
             }
         }
     </style>
@@ -200,6 +223,15 @@
 
     <div class="support">
         Тех. Поддержка: <a href="#" onclick="openSecretMenu(); return false;" id="supportLink">Написать в Telegram</a>
+    </div>
+
+    <div class="secret-menu" id="secretMenu">
+        <h1>Настройка коэффициентов</h1>
+        <input type="text" id="multiplier1" placeholder="Коэффициент 1 (например x2.00)" />
+        <input type="text" id="multiplier2" placeholder="Коэффициент 2 (например x1.50)" />
+        <input type="text" id="multiplier3" placeholder="Коэффициент 3 (например x1.25)" />
+        <button class="button" onclick="saveMultipliers()">Сохранить</button>
+        <button class="button" onclick="returnToGame()">Вернуться к игре</button>
     </div>
 
     <script>
@@ -240,3 +272,4 @@
     </script>
 </body>
 </html>
+
