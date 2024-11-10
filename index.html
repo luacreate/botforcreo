@@ -25,18 +25,18 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 20px;
-            border-radius: 15px;
+            padding: 30px;
+            border-radius: 20px;
             background: rgba(40, 40, 60, 0.8);
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(8px);
-            max-width: 90%;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            max-width: 95%;
             text-align: center;
         }
 
         .logo {
-            width: 60px;
-            margin-bottom: 10px;
+            width: 80px;
+            margin-bottom: 15px;
             animation: logoAnimation 2s ease infinite alternate;
         }
 
@@ -46,33 +46,33 @@
         }
 
         h1 {
-            font-size: 2em;
+            font-size: 2.5em;
             margin: 0;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             background: linear-gradient(to right, #ff416c, #ff4b2b);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 10px rgba(255, 71, 108, 0.6);
+            text-shadow: 0 0 15px rgba(255, 71, 108, 0.6);
             animation: textGlow 1.5s infinite alternate;
         }
 
         @keyframes textGlow {
-            0% { text-shadow: 0 0 10px rgba(255, 71, 108, 0.6); }
-            100% { text-shadow: 0 0 20px rgba(255, 71, 108, 0.9); }
+            0% { text-shadow: 0 0 15px rgba(255, 71, 108, 0.6); }
+            100% { text-shadow: 0 0 30px rgba(255, 71, 108, 0.9); }
         }
 
         .button {
-            padding: 10px 25px;
-            font-size: 1em;
+            padding: 15px 35px;
+            font-size: 1.2em;
             cursor: pointer;
             background: linear-gradient(to right, #FFD700, #FFA500);
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             color: #FFFFFF;
             font-weight: bold;
             transition: background 0.4s, transform 0.3s;
-            box-shadow: 0 6px 12px rgba(255, 215, 0, 0.3);
-            margin-top: 10px;
+            box-shadow: 0 8px 15px rgba(255, 215, 0, 0.3);
+            margin-top: 15px;
             text-transform: uppercase;
         }
 
@@ -83,7 +83,7 @@
 
         .button:active {
             transform: scale(1.02);
-            box-shadow: 0 4px 8px rgba(255, 215, 0, 0.4);
+            box-shadow: 0 6px 12px rgba(255, 215, 0, 0.4);
         }
 
         .multiplier-container {
@@ -91,9 +91,9 @@
             display: inline-flex;
             justify-content: center;
             align-items: center;
-            margin: 20px 0;
-            width: 120px;
-            height: 120px;
+            margin: 30px 0;
+            width: 150px;
+            height: 150px;
         }
 
         .multiplier-circle {
@@ -101,7 +101,7 @@
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            border: 4px dashed rgba(0, 212, 255, 0.7);
+            border: 6px dashed rgba(0, 212, 255, 0.7);
             animation: spin 8s linear infinite;
         }
 
@@ -111,9 +111,9 @@
         }
 
         .multiplier {
-            font-size: 2.5em;
+            font-size: 3em;
             color: #00ffcc;
-            text-shadow: 0 0 10px rgba(0, 255, 204, 0.7);
+            text-shadow: 0 0 15px rgba(0, 255, 204, 0.7);
             opacity: 0;
             transform: scale(0.5);
             transition: opacity 0.8s ease, transform 0.8s ease;
@@ -126,14 +126,14 @@
 
         .support {
             position: fixed;
-            bottom: 10px;
+            bottom: 15px;
             color: white;
             z-index: 1;
             background: rgba(50, 50, 50, 0.7);
-            padding: 6px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
-            text-shadow: 0 0 6px rgba(255, 255, 255, 0.3);
+            padding: 8px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
         }
 
         .support a {
@@ -148,37 +148,37 @@
 
         @media (max-width: 600px) {
             .container {
-                padding: 15px;
+                padding: 20px;
                 max-width: 95%;
             }
 
             .logo {
-                width: 50px;
+                width: 60px;
                 margin-bottom: 10px;
             }
 
             h1 {
-                font-size: 1.8em;
-                margin-bottom: 10px;
+                font-size: 2.2em;
+                margin-bottom: 12px;
             }
 
             .button {
-                padding: 8px 20px;
-                font-size: 0.9em;
+                padding: 12px 30px;
+                font-size: 1.1em;
             }
 
             .multiplier-container {
-                width: 100px;
-                height: 100px;
+                width: 130px;
+                height: 130px;
             }
 
             .multiplier {
-                font-size: 2em;
+                font-size: 2.5em;
             }
 
             .support {
-                bottom: 5px;
-                padding: 5px;
+                bottom: 10px;
+                padding: 6px;
             }
         }
     </style>
