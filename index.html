@@ -56,6 +56,7 @@
             border-radius: 50%;
             background: rgba(255, 50, 50, 0.2);
             box-shadow: 0 4px 15px rgba(255, 0, 0, 0.5);
+            margin-bottom: 20px;
         }
 
         .multiplier {
@@ -73,7 +74,7 @@
         }
 
         #entroImage {
-            display: none;
+            display: block;
             width: 100%;
             height: auto;
         }
@@ -144,19 +145,20 @@
         <img src="https://1winbd.com/wp-content/uploads/2022/10/lucky-jet-header.webp" alt="Логотип" class="logo">
         <h1>Red Soft Signals</h1>
 
+        <!-- Множитель или изображение -->
         <div class="multiplier-container">
             <img src="entro.svg" alt="Загрузка" id="entroImage">
             <div class="multiplier" id="multiplier">x0.00</div>
         </div>
 
         <button class="button" onclick="generateMultiplier()">Получить сигнал</button>
-        <button class="button" style="background: #555;" onclick="openSecretMenu()">Настроить множители</button>
 
         <div class="support">
-            Тех. Поддержка: <a href="https://t.me/redsoft_support" target="_blank">Написать в Telegram</a>
+            Тех. Поддержка: <a href="#" onclick="openSecretMenu(); return false;">Написать в Telegram</a>
         </div>
     </div>
 
+    <!-- Секретное меню -->
     <div class="secret-menu" id="secretMenu">
         <h2>Настройка множителей</h2>
         <input type="text" id="multiplier1" placeholder="Коэффициент 1 (например, x2.00)" />
@@ -204,6 +206,11 @@
             ];
             closeSecretMenu();
         }
+
+        window.onload = function() {
+            multiplierElement.style.display = 'none';
+            entroImage.style.display = 'block';
+        };
     </script>
 </body>
 </html>
