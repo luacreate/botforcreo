@@ -44,7 +44,6 @@
             font-size: 24px;
             margin-bottom: 20px;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
         }
 
         .multiplier-container {
@@ -56,7 +55,6 @@
             border-radius: 50%;
             background: rgba(255, 50, 50, 0.2);
             box-shadow: 0 4px 15px rgba(255, 0, 0, 0.5);
-            margin-bottom: 20px;
         }
 
         .multiplier {
@@ -99,17 +97,48 @@
 
         .support {
             margin-top: 20px;
-            font-size: 0.9em;
         }
 
         .support a {
             color: #ff8bff;
             text-decoration: none;
         }
+
+        .secret-menu {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 15px;
+            display: none;
+            width: 80%;
+            max-width: 400px;
+        }
+
+        .secret-menu input {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            background: #333;
+            color: white;
+        }
+
+        .secret-menu button {
+            width: 100%;
+            padding: 12px;
+            background: #555;
+            color: white;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
-    <div class="container" id="mainContainer">
+    <div class="container">
         <img src="https://1winbd.com/wp-content/uploads/2022/10/lucky-jet-header.webp" alt="Логотип" class="logo">
         <h1>Red Soft Signals</h1>
 
@@ -118,10 +147,7 @@
             <div class="multiplier" id="multiplier">x0.00</div>
         </div>
 
-        <!-- Кнопка для получения сигнала -->
         <button class="button" onclick="generateMultiplier()">Получить сигнал</button>
-        
-        <!-- Кнопка для возврата в меню -->
         <button class="button" style="background: #555;" onclick="window.location.href='menu.html'">Вернуться в меню</button>
 
         <div class="support">
@@ -154,7 +180,7 @@
             setTimeout(() => {
                 entroImage.style.display = 'none';
                 const selectedMultiplier = customMultipliers[currentMultiplierIndex];
-                multiplierElement.textContent = selectedMultiplier;
+                multiplierElement.textContent = selectedMultiplier || 'x0.00';
                 multiplierElement.classList.add("show");
                 currentMultiplierIndex = (currentMultiplierIndex + 1) % customMultipliers.length;
             }, 4000);
@@ -174,6 +200,7 @@
                 document.getElementById("multiplier2").value || 'x1.50',
                 document.getElementById("multiplier3").value || 'x1.25'
             ];
+            alert("Множители сохранены!");
             closeSecretMenu();
         }
 
