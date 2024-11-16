@@ -29,7 +29,6 @@
             border-radius: 20px;
             background: rgba(40, 40, 60, 0.8);
             box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
             max-width: 90%;
             text-align: center;
         }
@@ -40,78 +39,26 @@
             animation: logoAnimation 2s ease infinite alternate;
         }
 
-        @keyframes logoAnimation {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-10px); }
-        }
-
-        h1 {
-            font-size: 2.8em;
-            margin: 0;
+        .accuracy-message {
+            font-size: 1.2em;
             margin-bottom: 20px;
-            background: linear-gradient(to right, #ff416c, #ff4b2b);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 20px rgba(255, 71, 108, 0.6);
-            animation: textGlow 1.5s infinite alternate;
-        }
-
-        @keyframes textGlow {
-            0% { text-shadow: 0 0 20px rgba(255, 71, 108, 0.6); }
-            100% { text-shadow: 0 0 40px rgba(255, 71, 108, 0.9); }
-        }
-
-        .button {
-            padding: 18px 40px;
-            font-size: 1.4em;
-            cursor: pointer;
-            background: linear-gradient(to right, #FFD700, #FFA500);
-            border: none;
-            border-radius: 15px;
-            color: #FFFFFF;
-            font-weight: bold;
-            transition: background 0.4s, transform 0.3s;
-            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.3);
-            margin-top: 20px;
-            text-transform: uppercase;
-        }
-
-        .button:hover {
-            background: linear-gradient(to right, #FFA500, #FFD700);
-            transform: scale(1.05);
-        }
-
-        .button:active {
-            transform: scale(1.02);
-            box-shadow: 0 6px 15px rgba(255, 215, 0, 0.4);
+            color: #FFD700;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
         }
 
         .multiplier-container {
             position: relative;
-            display: inline-flex;
+            display: flex;
             justify-content: center;
             align-items: center;
-            margin: 35px 0;
             width: 170px;
             height: 170px;
-        }
-
-        .multiplier-circle {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            border: 6px dashed rgba(0, 212, 255, 0.7);
-            animation: spin 8s linear infinite;
-        }
-
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+            margin: 30px 0;
         }
 
         .multiplier {
-            font-size: 3.2em;
+            font-size: 3em;
             color: #00ffcc;
             text-shadow: 0 0 20px rgba(0, 255, 204, 0.7);
             opacity: 0;
@@ -124,85 +71,39 @@
             transform: scale(1);
         }
 
+        #entroImage {
+            display: none;
+            width: 100%;
+            height: auto;
+        }
+
+        .button {
+            padding: 18px 40px;
+            font-size: 1.4em;
+            cursor: pointer;
+            background: linear-gradient(to right, #FFD700, #FFA500);
+            border: none;
+            border-radius: 15px;
+            margin-top: 20px;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        .button:hover {
+            transform: scale(1.05);
+        }
+
         .support {
             position: fixed;
             bottom: 20px;
-            color: white;
-            z-index: 1;
             background: rgba(50, 50, 50, 0.7);
             padding: 10px;
             border-radius: 12px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
         }
 
         .support a {
             color: #ff8bff;
             text-decoration: none;
-            font-weight: bold;
-        }
-
-        .support a:hover {
-            text-decoration: underline;
-        }
-
-        .secret-menu {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 3;
-            background-color: rgba(0, 0, 0, 0.95);
-            padding: 20px;
-            border-radius: 15px;
-            display: none;
-            width: 80%;
-            max-width: 400px;
-            text-align: center;
-        }
-
-        .secret-menu input {
-            width: calc(100% - 20px);
-            margin-bottom: 10px;
-            padding: 10px;
-            border: none;
-            border-radius: 8px;
-        }
-
-        @media (max-width: 600px) {
-            .container {
-                padding: 25px;
-                max-width: 95%;
-            }
-
-            .logo {
-                width: 80px;
-                margin-bottom: 15px;
-            }
-
-            h1 {
-                font-size: 2.5em;
-                margin-bottom: 15px;
-            }
-
-            .button {
-                padding: 15px 35px;
-                font-size: 1.2em;
-            }
-
-            .multiplier-container {
-                width: 150px;
-                height: 150px;
-            }
-
-            .multiplier {
-                font-size: 3em;
-            }
-
-            .support {
-                bottom: 15px;
-                padding: 8px;
-            }
         }
     </style>
 </head>
@@ -211,65 +112,59 @@
         <a href="https://your-link-here.com" target="_blank">
             <img src="https://1winbd.com/wp-content/uploads/2022/10/lucky-jet-header.webp" alt="Логотип" class="logo" />
         </a>
-        <h1 id="heading">Red Soft Signals </h1>
-        
+        <h1>Red Soft Signals</h1>
+
+        <!-- Сообщение о точности сигналов -->
+        <div class="accuracy-message" id="accuracyMessage"></div>
+
+        <!-- Множитель или изображение -->
         <div class="multiplier-container">
-            <div class="multiplier-circle"></div>
+            <img src="entro.svg" alt="Загрузка" id="entroImage">
             <div class="multiplier" id="multiplier">x0.00</div>
         </div>
+
         <button class="button" onclick="generateCustomMultiplier()">Получить сигнал</button>
         <button class="button" style="background: #555;" onclick="window.location.href='menu.html'">Вернуться в меню</button>
     </div>
 
     <div class="support">
-        Тех. Поддержка: <a href="#" onclick="openSecretMenu(); return false;" id="supportLink">Написать в Telegram</a>
+        Тех. Поддержка: <a href="#">Написать в Telegram</a>
     </div>
 
-    <div class="secret-menu" id="secretMenu">
-        <h1>Настройка коэффициентов</h1>
-        <input type="text" id="multiplier1" placeholder="Коэффициент 1 (например x2.00)" />
-        <input type="text" id="multiplier2" placeholder="Коэффициент 2 (например x1.50)" />
-        <input type="text" id="multiplier3" placeholder="Коэффициент 3 (например x1.25)" />
-        <button class="button" onclick="saveMultipliers()">Сохранить</button>
-        <button class="button" onclick="returnToGame()">Вернуться к игре</button>
-    </div>
+<script>
+    let customMultipliers = ['x2.00', 'x1.50', 'x1.25'];
+    let currentMultiplierIndex = 0;
 
-    <script>
-        let customMultipliers = ['x2.00', 'x1.50', 'x1.25'];
-        let currentMultiplierIndex = 0;
+    const multiplierElement = document.getElementById("multiplier");
+    const entroImage = document.getElementById("entroImage");
+    const accuracyMessageElement = document.getElementById("accuracyMessage");
 
-        function openSecretMenu() {
-            document.getElementById("mainContainer").style.pointerEvents = "none";
-            document.getElementById("secretMenu").style.display = "block";
-        }
+    // Функция отображения точности сигналов (всегда 100%)
+    function displayAccuracyMessage() {
+        accuracyMessageElement.textContent = `Точность сигналов для вашего аккаунта: 100%`;
+        accuracyMessageElement.style.opacity = '1';
+    }
 
-        function saveMultipliers() {
-            const multiplier1 = document.getElementById("multiplier1").value;
-            const multiplier2 = document.getElementById("multiplier2").value;
-            const multiplier3 = document.getElementById("multiplier3").value;
+    // Функция генерации множителя
+    function generateCustomMultiplier() {
+        // Показать точность перед сигналом
+        displayAccuracyMessage();
 
-            customMultipliers = [multiplier1, multiplier2, multiplier3];
+        multiplierElement.classList.remove("show");
+        entroImage.style.display = 'block';
+        multiplierElement.style.display = 'none';
 
-            alert("Коэффициенты сохранены!");
-            returnToGame();
-        }
+        // Задержка на 4 секунды перед выдачей сигнала
+        setTimeout(() => {
+            entroImage.style.display = 'none';
+            const selectedMultiplier = customMultipliers[currentMultiplierIndex];
+            multiplierElement.textContent = selectedMultiplier;
+            multiplierElement.style.display = 'block';
+            multiplierElement.classList.add("show");
+            currentMultiplierIndex = (currentMultiplierIndex + 1) % customMultipliers.length;
+        }, 4000);
+    }
+</script>
 
-        function returnToGame() {
-            document.getElementById("secretMenu").style.display = "none";
-            document.getElementById("mainContainer").style.pointerEvents = "auto";
-        }
-
-        function generateCustomMultiplier() {
-            const multiplierElement = document.getElementById("multiplier");
-            multiplierElement.classList.remove("show");
-            setTimeout(() => {
-                const selectedMultiplier = customMultipliers[currentMultiplierIndex];
-                multiplierElement.textContent = selectedMultiplier;
-                multiplierElement.classList.add("show");
-                currentMultiplierIndex = (currentMultiplierIndex + 1) % customMultipliers.length;
-            }, 2000);
-        }
-    </script>
 </body>
 </html>
-
