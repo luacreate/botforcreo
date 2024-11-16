@@ -47,6 +47,7 @@
         }
 
         .multiplier-container {
+            position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -55,6 +56,7 @@
             border-radius: 50%;
             background: rgba(255, 50, 50, 0.2);
             box-shadow: 0 4px 15px rgba(255, 0, 0, 0.5);
+            margin-bottom: 20px;
         }
 
         .multiplier {
@@ -64,17 +66,25 @@
             opacity: 0;
             transform: scale(0.5);
             transition: opacity 0.8s ease, transform 0.8s ease;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
 
         .multiplier.show {
             opacity: 1;
-            transform: scale(1);
+            transform: translate(-50%, -50%) scale(1);
         }
 
         #entroImage {
-            display: block;
+            display: none;
             width: 100%;
             height: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
 
         .button {
@@ -208,7 +218,6 @@
                 document.getElementById("multiplier3").value || 'x1.25'
             ];
             localStorage.setItem('multipliers', JSON.stringify(customMultipliers));
-            alert("Множители сохранены!");
             closeSecretMenu();
         }
 
