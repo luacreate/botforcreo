@@ -106,38 +106,6 @@
             color: #ff8bff;
             text-decoration: none;
         }
-
-        .secret-menu {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.8);
-            padding: 20px;
-            border-radius: 15px;
-            display: none;
-            width: 80%;
-            max-width: 400px;
-        }
-
-        .secret-menu input {
-            width: 100%;
-            margin-bottom: 10px;
-            padding: 10px;
-            border: none;
-            border-radius: 8px;
-            background: #333;
-            color: white;
-        }
-
-        .secret-menu button {
-            width: 100%;
-            padding: 12px;
-            background: #555;
-            color: white;
-            border-radius: 8px;
-            margin-top: 10px;
-        }
     </style>
 </head>
 <body>
@@ -145,20 +113,22 @@
         <img src="https://1winbd.com/wp-content/uploads/2022/10/lucky-jet-header.webp" alt="Логотип" class="logo">
         <h1>Red Soft Signals</h1>
 
-        <!-- Множитель или изображение -->
         <div class="multiplier-container">
             <img src="entro.svg" alt="Загрузка" id="entroImage">
             <div class="multiplier" id="multiplier">x0.00</div>
         </div>
 
+        <!-- Кнопка для получения сигнала -->
         <button class="button" onclick="generateMultiplier()">Получить сигнал</button>
+        
+        <!-- Кнопка для возврата в меню -->
+        <button class="button" style="background: #555;" onclick="window.location.href='menu.html'">Вернуться в меню</button>
 
         <div class="support">
             Тех. Поддержка: <a href="#" onclick="openSecretMenu(); return false;">Написать в Telegram</a>
         </div>
     </div>
 
-    <!-- Секретное меню -->
     <div class="secret-menu" id="secretMenu">
         <h2>Настройка множителей</h2>
         <input type="text" id="multiplier1" placeholder="Коэффициент 1 (например, x2.00)" />
