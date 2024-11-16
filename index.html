@@ -138,7 +138,7 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container" id="mainContainer">
         <img src="https://1winbd.com/wp-content/uploads/2022/10/lucky-jet-header.webp" alt="Логотип" class="logo">
         <h1>Red Soft Signals</h1>
 
@@ -165,33 +165,40 @@
     </div>
 
     <script>
-        let customMultipliers = ['x2.00', 'x1.50', 'x1.25'];
-        let currentMultiplierIndex = 0;
+        let customMultipliers = [];
 
-        const multiplierElement = document.getElementById("multiplier");
-        const entroImage = document.getElementById("entroImage");
-        const secretMenu = document.getElementById("secretMenu");
+        function loadMultipliers() {
+            const savedMultipliers = JSON.parse(localStorage.getItem('multipliers'));
+            if (savedMultipliers) {
+                customMultipliers = savedMultipliers;
+            } else {
+                customMultipliers = ['x2.00', 'x1.50', 'x1.25'];
+            }
+        }
 
         function generateMultiplier() {
+            loadMultipliers();
+            const multiplierElement = document.getElementById("multiplier");
+            const entroImage = document.getElementById("entroImage");
+
             multiplierElement.classList.remove("show");
             entroImage.style.display = 'block';
             multiplierElement.style.display = 'none';
 
             setTimeout(() => {
                 entroImage.style.display = 'none';
-                const selectedMultiplier = customMultipliers[currentMultiplierIndex];
+                const selectedMultiplier = customMultipliers[Math.floor(Math.random() * customMultipliers.length)];
                 multiplierElement.textContent = selectedMultiplier || 'x0.00';
                 multiplierElement.classList.add("show");
-                currentMultiplierIndex = (currentMultiplierIndex + 1) % customMultipliers.length;
             }, 4000);
         }
 
         function openSecretMenu() {
-            secretMenu.style.display = 'block';
+            document.getElementById("secretMenu").style.display = 'block';
         }
 
         function closeSecretMenu() {
-            secretMenu.style.display = 'none';
+            document.getElementById("secretMenu").style.display = 'none';
         }
 
         function saveMultipliers() {
@@ -200,13 +207,13 @@
                 document.getElementById("multiplier2").value || 'x1.50',
                 document.getElementById("multiplier3").value || 'x1.25'
             ];
+            localStorage.setItem('multipliers', JSON.stringify(customMultipliers));
             alert("Множители сохранены!");
             closeSecretMenu();
         }
 
         window.onload = function() {
-            multiplierElement.style.display = 'none';
-            entroImage.style.display = 'block';
+            loadMultipliers();
         };
     </script>
 </body>
