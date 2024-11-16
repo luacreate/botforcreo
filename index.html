@@ -28,7 +28,7 @@
             align-items: center;
             padding: 40px;
             border-radius: 20px;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.7);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(10px);
             width: 90%;
@@ -44,10 +44,10 @@
             font-size: 24px;
             margin-bottom: 20px;
             text-transform: uppercase;
+            letter-spacing: 1.5px;
         }
 
         .multiplier-container {
-            position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -56,35 +56,19 @@
             border-radius: 50%;
             background: rgba(255, 50, 50, 0.2);
             box-shadow: 0 4px 15px rgba(255, 0, 0, 0.5);
-            margin-bottom: 20px;
         }
 
         .multiplier {
             font-size: 2em;
             font-weight: bold;
-            color: #ff6f61;
-            opacity: 0;
-            transform: scale(0.5);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        .multiplier.show {
-            opacity: 1;
-            transform: translate(-50%, -50%) scale(1);
+            color: #00ffcc;
+            display: none;
         }
 
         #entroImage {
-            display: none;
+            display: block;
             width: 100%;
             height: auto;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
         }
 
         .button {
@@ -107,6 +91,7 @@
 
         .support {
             margin-top: 20px;
+            font-size: 0.9em;
         }
 
         .support a {
@@ -119,37 +104,35 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.8);
+            z-index: 3;
+            background-color: rgba(0, 0, 0, 0.9);
             padding: 20px;
             border-radius: 15px;
             display: none;
             width: 80%;
             max-width: 400px;
+            text-align: center;
         }
 
         .secret-menu input {
-            width: 100%;
+            width: calc(100% - 20px);
             margin-bottom: 10px;
             padding: 10px;
             border: none;
             border-radius: 8px;
-            background: #333;
-            color: white;
+            font-size: 1em;
         }
 
-        .secret-menu button {
-            width: 100%;
-            padding: 12px;
-            background: #555;
-            color: white;
-            border-radius: 8px;
+        .secret-menu .button {
             margin-top: 10px;
         }
     </style>
 </head>
 <body>
     <div class="container" id="mainContainer">
-        <img src="https://1winbd.com/wp-content/uploads/2022/10/lucky-jet-header.webp" alt="Логотип" class="logo">
+        <a href="https://your-link-here.com" target="_blank">
+            <img src="https://1winbd.com/wp-content/uploads/2022/10/lucky-jet-header.webp" alt="Логотип" class="logo">
+        </a>
         <h1>Red Soft Signals</h1>
 
         <div class="multiplier-container">
@@ -157,8 +140,8 @@
             <div class="multiplier" id="multiplier">x0.00</div>
         </div>
 
-        <button class="button" onclick="generateMultiplier()">Получить сигнал</button>
-        <button class="button" style="background: #555;" onclick="window.location.href='menu.html'">Вернуться в меню</button>
+        <button class="button" onclick="generateCustomMultiplier()">Получить сигнал</button>
+        <button class="button secondary" onclick="window.location.href='menu.html'">Вернуться в меню</button>
 
         <div class="support">
             Тех. Поддержка: <a href="#" onclick="openSecretMenu(); return false;">Написать в Telegram</a>
@@ -166,64 +149,58 @@
     </div>
 
     <div class="secret-menu" id="secretMenu">
-        <h2>Настройка множителей</h2>
-        <input type="text" id="multiplier1" placeholder="Коэффициент 1 (например, x2.00)" />
-        <input type="text" id="multiplier2" placeholder="Коэффициент 2 (например, x1.50)" />
-        <input type="text" id="multiplier3" placeholder="Коэффициент 3 (например, x1.25)" />
-        <button onclick="saveMultipliers()">Сохранить</button>
-        <button onclick="closeSecretMenu()">Вернуться к игре</button>
+        <h1>Настройка коэффициентов</h1>
+        <input type="text" id="multiplier1" placeholder="Коэффициент 1 (например x2.00)" />
+        <input type="text" id="multiplier2" placeholder="Коэффициент 2 (например x1.50)" />
+        <input type="text" id="multiplier3" placeholder="Коэффициент 3 (например x1.25)" />
+        <button class="button" onclick="saveMultipliers()">Сохранить</button>
+        <button class="button" onclick="closeSecretMenu()">Вернуться к игре</button>
     </div>
 
     <script>
-        let customMultipliers = [];
-
-        function loadMultipliers() {
-            const savedMultipliers = JSON.parse(localStorage.getItem('multipliers'));
-            if (savedMultipliers) {
-                customMultipliers = savedMultipliers;
-            } else {
-                customMultipliers = ['x2.00', 'x1.50', 'x1.25'];
-            }
-        }
-
-        function generateMultiplier() {
-            loadMultipliers();
-            const multiplierElement = document.getElementById("multiplier");
-            const entroImage = document.getElementById("entroImage");
-
-            multiplierElement.classList.remove("show");
-            entroImage.style.display = 'block';
-            multiplierElement.style.display = 'none';
-
-            setTimeout(() => {
-                entroImage.style.display = 'none';
-                const selectedMultiplier = customMultipliers[Math.floor(Math.random() * customMultipliers.length)];
-                multiplierElement.textContent = selectedMultiplier || 'x0.00';
-                multiplierElement.classList.add("show");
-            }, 4000);
-        }
+        let customMultipliers = ['x2.00', 'x1.50', 'x1.25'];
+        let currentMultiplierIndex = 0;
 
         function openSecretMenu() {
-            document.getElementById("secretMenu").style.display = 'block';
+            document.getElementById("mainContainer").style.pointerEvents = "none";
+            document.getElementById("secretMenu").style.display = "block";
         }
 
         function closeSecretMenu() {
-            document.getElementById("secretMenu").style.display = 'none';
+            document.getElementById("secretMenu").style.display = "none";
+            document.getElementById("mainContainer").style.pointerEvents = "auto";
         }
 
         function saveMultipliers() {
+            const multiplier1 = document.getElementById("multiplier1").value;
+            const multiplier2 = document.getElementById("multiplier2").value;
+            const multiplier3 = document.getElementById("multiplier3").value;
+
             customMultipliers = [
-                document.getElementById("multiplier1").value || 'x2.00',
-                document.getElementById("multiplier2").value || 'x1.50',
-                document.getElementById("multiplier3").value || 'x1.25'
+                multiplier1 || 'x2.00',
+                multiplier2 || 'x1.50',
+                multiplier3 || 'x1.25'
             ];
-            localStorage.setItem('multipliers', JSON.stringify(customMultipliers));
+
+            alert("Коэффициенты сохранены!");
             closeSecretMenu();
         }
 
-        window.onload = function() {
-            loadMultipliers();
-        };
+        function generateCustomMultiplier() {
+            const multiplierElement = document.getElementById("multiplier");
+            const entroImage = document.getElementById("entroImage");
+
+            multiplierElement.style.display = 'none';
+            entroImage.style.display = 'block';
+
+            setTimeout(() => {
+                entroImage.style.display = 'none';
+                const selectedMultiplier = customMultipliers[currentMultiplierIndex];
+                multiplierElement.textContent = selectedMultiplier;
+                multiplierElement.style.display = 'block';
+                currentMultiplierIndex = (currentMultiplierIndex + 1) % customMultipliers.length;
+            }, 2000);
+        }
     </script>
 </body>
 </html>
