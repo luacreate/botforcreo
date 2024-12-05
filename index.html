@@ -150,9 +150,9 @@
 
     <div class="secret-menu" id="secretMenu">
         <h1>Настройка коэффициентов</h1>
-        <input type="text" id="multiplier1" placeholder="Коэффициент 1 (например x2.00)" />
-        <input type="text" id="multiplier2" placeholder="Коэффициент 2 (например x1.50)" />
-        <input type="text" id="multiplier3" placeholder="Коэффициент 3 (например x1.25)" />
+        <input type="text" id="multiplier1" placeholder="Коэффициент 1 (например x2.00)" oninput="formatMultiplierInput(this)" />
+        <input type="text" id="multiplier2" placeholder="Коэффициент 2 (например x1.50)" oninput="formatMultiplierInput(this)" />
+        <input type="text" id="multiplier3" placeholder="Коэффициент 3 (например x1.25)" oninput="formatMultiplierInput(this)" />
         <button class="button" onclick="saveMultipliers()">Сохранить</button>
         <button class="button" onclick="closeSecretMenu()">Вернуться к игре</button>
     </div>
@@ -171,6 +171,17 @@
             document.getElementById("mainContainer").style.pointerEvents = "auto";
         }
 
+        function formatMultiplierInput(inputElement) {
+            let value = inputElement.value.replace(/[^0-9.]/g, '');
+            if ((value.match(/\./g) || []).length > 1) {
+                value = value.slice(0, -1);
+            }
+            if (value && !value.startsWith('x')) {
+                value = 'x' + value;
+            }
+            inputElement.value = value;
+        }
+
         function saveMultipliers() {
             const multiplier1 = document.getElementById("multiplier1").value;
             const multiplier2 = document.getElementById("multiplier2").value;
@@ -181,6 +192,15 @@
                 multiplier2 || 'x1.50',
                 multiplier3 || 'x1.25'
             ];
+
+            const multiplierElement = document.getElementById("multiplier");
+            const entroImage = document.getElementById("entroImage");
+
+            multiplierElement.style.display = 'none';
+            multiplierElement.textContent = 'x0.00';
+            entroImage.style.display = 'block';
+
+            currentMultiplierIndex = 0;
 
             alert("Коэффициенты сохранены!");
             closeSecretMenu();
